@@ -18,3 +18,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'corretto'
+
+      - name: Unit tests
+        run: mvn -B test --file pom.xml
+
+      - name: Build Spring App
+        run: |
+          mvn clean package --file pom.xml
