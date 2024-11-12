@@ -25,3 +25,25 @@ jobs:
       - name: Build Spring App
         run: |
           mvn clean package --file pom.xml
+      
+      - name: Build docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          dockerfile: Dockerfile
+          push: false
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/springboot:$(date-'%Y-%m-%d')
+      
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_TOKEN}} 
+      
+      - name: Push to DockerHub
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          dockerfile: Dockerfile
+          push: true
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/springboot:$(date-'%Y-%m-%d')
