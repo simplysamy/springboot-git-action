@@ -47,4 +47,4 @@ jobs:
           context: .
           dockerfile: Dockerfile
           push: true
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/springboot-for-beginner:v1
+          tags: ${{secrets.DOCKERHUB_USER_NAME}}/springboot-for-beginner:v1
